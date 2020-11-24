@@ -1,0 +1,48 @@
+.imageZoom{
+  display: inline-block;
+}
+
+.img{
+  width: 200px;
+  height: 130px;
+}
+
+
+.glassBox{
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .7);
+}
+
+.glass{
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  left: 40px;
+  bottom: 40px;
+  overflow: hidden;
+}
+
+
+.footer{
+  background-color: rgba(0, 0, 0, .4);
+  left: 0;
+  right: 0;
+  position: fixed;
+  height: 40px;
+  user-select: none;
+  bottom: 0;
+  z-index: 10000;
+}
+.footetnav {
+  display: flex;
+  justify-content: center;
+}
+
+.footer span{
+  padding: 10px 20px;
+  color: #fff;
+}
