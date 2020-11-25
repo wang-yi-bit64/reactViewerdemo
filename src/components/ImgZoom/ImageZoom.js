@@ -22,7 +22,8 @@ export default class ImageZoom extends React.Component {
       drag:false,
       translateX: 0,
       translateY: 0,
-      time: null
+      time: null,
+      rotate: 0
     }
   }
   componentDidMount() {
@@ -59,7 +60,8 @@ export default class ImageZoom extends React.Component {
       index: index,
       coefficient: 1,
       translateX: 0,
-      translateY: 0
+      translateY: 0,
+      rotate: 0
     })
   }
 
@@ -73,10 +75,10 @@ export default class ImageZoom extends React.Component {
   // 下一步
   nextStep = () => {
     const { srcs } = this.props
-    const { index } = this.state
+    const { index, rotate } = this.state
     const preIndex = index + 1
     console.log('srcs list',index !== srcs.length);
-    index !== srcs.length && this.setState({showSrc: srcs[preIndex], index: preIndex, coefficient: 1, translateX: 0, translateY: 0})
+    index !== srcs.length && this.setState({showSrc: srcs[preIndex], index: preIndex, coefficient: 1, translateX: 0, translateY: 0, rotate: 0})
   }
 
   fangda = () => {
@@ -122,17 +124,27 @@ export default class ImageZoom extends React.Component {
       })
     }
   }
-
-
-
+  leftRotate = () => {
+    let {rotate} = this.state
+    this.setState({
+      rotate:rotate - 90
+    })
+  }
+  rightRotate = () => {
+    let {rotate} = this.state
+    this.setState({
+      rotate:rotate + 90
+    })
+  }
   render() {
     const { srcs } = this.props
-    const { showSrc , drag ,translateX,translateY,index} = this.state
+    const { showSrc , drag ,translateX,translateY,index,rotate} = this.state
     const imgStyle = {
       position:'absolute',
       top:translateY,
       left:translateX,
-      cursor:drag ? 'move': 'move'
+      cursor:drag ? 'move': 'move',
+      transform:`rotate(${rotate}deg)`
     }
     return (
       <div>
@@ -158,8 +170,8 @@ export default class ImageZoom extends React.Component {
             <span onClick={() => this.nextStep(index)}>下一张</span>
             <span onClick={() => this.fangda()}>放大</span>
             <span onClick={() => this.suoxiao()}>缩小</span>
-            {/* <span>左旋</span> */}
-            {/* <span>右旋</span> */}
+            <span onClick={this.leftRotate}>左旋</span>
+            <span onClick={this.rightRotate}>右旋</span>
           </div>
         </div>
       </div>
