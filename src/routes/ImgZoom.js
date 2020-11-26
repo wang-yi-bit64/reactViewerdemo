@@ -1,31 +1,32 @@
+/* eslint-disable react/jsx-filename-extension */
 /*
  * @Author: your name
  * @Date: 2020-11-17 16:43:49
- * @LastEditTime: 2020-11-24 13:59:07
+ * @LastEditTime: 2020-11-25 18:20:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \reactViewer\src\routes\ImgZoom.js
  */
-import React from 'react';
-import {connect} from 'dva'
-import ImageZoom from '../components/ImgZoom'
+import React from "react"
+import {connect} from "dva"
+import ImageZoom from "../components/ImgZoom"
 
 
 const Demolist = () => {
-  let sourceImageUrls = [
-    "http://img.s.youfenba.com/material_thumb/BYX6Mm67ba.jpg",
-    "http://img.s.youfenba.com/material_thumb/8nzxJwpsPX.jpg",
-    "http://img.s.youfenba.com/material_thumb/SaNktASjmp.jpg",
-    "http://img.s.youfenba.com/material_thumb/cTma2FTPEC.jpg",
-    "http://img.s.youfenba.com/material_thumb/KnNc6D4sGs.jpg"
-  ]
-  let thumbImageUrls = sourceImageUrls
-  // let thumbImageUrls = ["http://img.s.youfenba.com/material_thumb/BYX6Mm67ba.jpg"]
-  return (
-    <div>
-      <ImageZoom srcs={thumbImageUrls} />
-    </div>
-  )
+	const sourceImageUrls = [
+		"http://img.s.youfenba.com/material_thumb/BYX6Mm67ba.jpg",
+		"http://img.s.youfenba.com/material_thumb/8nzxJwpsPX.jpg",
+		"http://img.s.youfenba.com/material_thumb/SaNktASjmp.jpg",
+		"http://img.s.youfenba.com/material_thumb/cTma2FTPEC.jpg",
+		"http://img.s.youfenba.com/material_thumb/KnNc6D4sGs.jpg"
+	]
+	const thumbImageUrls = sourceImageUrls
+	// let thumbImageUrls = ["http://img.s.youfenba.com/material_thumb/BYX6Mm67ba.jpg"]
+	return (
+		<div>
+			<ImageZoom srcs={thumbImageUrls}/>
+		</div>
+	)
 }
 
 // class Demolist extends Component {
@@ -41,7 +42,6 @@ const Demolist = () => {
 //       ],
 //     };
 //   }
-
 
 
 //   render() {
@@ -74,5 +74,4 @@ const Demolist = () => {
 const modelPorps = ({example}) => ({example})
 
 export default connect(modelPorps)(Demolist)
-
 
