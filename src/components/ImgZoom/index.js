@@ -1,2 +1,3 @@
-import ImageZoom from './ImageZoom'
+import ImageZoom from "./ImageZoom"
+
 export default ImageZoom

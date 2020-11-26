@@ -3,7 +3,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-13 16:32:16
- * @LastEditTime: 2020-11-25 18:20:36
+ * @LastEditTime: 2020-11-26 13:47:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \reactViewer\src\routes\demo.js
@@ -27,7 +27,7 @@ const Demolist = () => {
 		<RViewer imageUrls={sourceImageUrls}>
 			<ul>
 				{thumbImageUrls.map((pic, index) => (
-					<li key={index} style={{marginBottom: "20PX"}}>
+					<li key={pic} style={{marginBottom: "20PX"}}>
 						{console.log(pic, index)}
 						<span>image {index + 1}</span>
 						{/*By default, the index value is 0,So it is necessary to set the index prop*/}

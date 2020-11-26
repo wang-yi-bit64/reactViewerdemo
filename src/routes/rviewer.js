@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-11-12 15:03:56
- * @LastEditTime: 2020-11-25 18:21:24
- * @LastEditors: your name
+ * @LastEditTime: 2020-11-26 13:47:23
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \reactViewer\src\routes\rviewer.js
  */
@@ -28,7 +28,6 @@ class Rviewer extends Component {
 
 	render() {
 		const { data } = this.state
-		console.log(data)
 		return (
 			<div>
       1231
@@ -36,7 +35,7 @@ class Rviewer extends Component {
 					<ul>
 						{
 							data && data.map((pic, index) => (
-								<li key={index} style={{marginBottom: "20px"}}>
+								<li key={pic} style={{marginBottom: "20px"}}>
 									<span>image {index + 1}</span>
 									<RViewerTrigger index={index}>
 										<img src={pic} alt={pic} style={{width: "50px", verticalAlign: "middle"}}/>

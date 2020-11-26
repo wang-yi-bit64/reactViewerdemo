@@ -1,16 +1,17 @@
 /*
  * @Author: your name
  * @Date: 2020-11-10 17:55:00
- * @LastEditTime: 2020-11-25 18:21:15
- * @LastEditors: your name
+ * @LastEditTime: 2020-11-26 13:47:39
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \reactViewer\src\routes\IndexPage.js
  */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/jsx-filename-extension */
 import React, { Component } from "react"
-import ShowImg from "../components/Images"
 import {connect} from "dva"
+
+import ShowImg from "../components/Images"
 
 class IndexPage extends Component {
 	constructor(props) {
