@@ -1,3 +1,4 @@
+/* eslint-disable  */
 /* eslint-disable no-multi-assign */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable no-param-reassign */

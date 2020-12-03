@@ -1,4 +1,4 @@
-
+/* eslint-disable */
 import React, { Component } from "react"
 import Loading from "./Loading"
 

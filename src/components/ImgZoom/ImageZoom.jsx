@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from "react"
+import { Icon } from "antd"
 import classes from "./ImageZoom.css"
 
 export default class ImageZoom extends React.Component {
@@ -17,31 +18,18 @@ export default class ImageZoom extends React.Component {
 			translateX: 0,
 			translateY: 0,
 			rotate: 0,
-			list: [],
+			list: this.props.srcs || [],
+			show: false
 		}
 		this.container = React.createRef()
 	}
 	componentDidMount() {
-		// this.container.current.addEventListener("mouseup", this.holdUp())
 		document.addEventListener("mouseup", this.holdUp())
-		// this.container.current.addEventListener("mousemove", e => this.mouseMove())
 		document.addEventListener("mousemove", this.mouseMove)
-	}
-	componentWillReceiveProps(nextProps) {
-		const srcslist = []
-		// eslint-disable-next-line array-callback-return
-		nextProps.srcs.map((item) => {
-			srcslist.push(item.url)
-		})
-		this.setState({
-			list: srcslist
-		})
 	}
 	componentWillUnmount() {
 		document.removeEventListener("mouseup", this.holdUp())
-		// this.container.current.removeEventListener("mouseup", this.holdUp())
 		document.removeEventListener("mousemove", this.mouseDown)
-		// this.container.current.removeEventListener("mousemove", this.mouseDown())
 	}
 
 
@@ -69,7 +57,8 @@ export default class ImageZoom extends React.Component {
   		coefficient: 1,
   		translateX: 0,
   		translateY: 0,
-  		rotate: 0
+  		rotate: 0,
+  		show: true
   	})
   }
 
@@ -88,11 +77,17 @@ export default class ImageZoom extends React.Component {
   			rotate: 0
   		})
   	}
+  	if (preIndex < 0) {
+  		this.setState({
+  			show: false,
+  			showSrc: null
+  		})
+  	}
   }
   // 下一步
   nextStep = () => {
   	const { srcs } = this.props
-  	const { index, rotate } = this.state
+  	const { index } = this.state
   	const preIndex = index + 1
   	if (index !== srcs.length) {
   		this.setState({
@@ -101,7 +96,14 @@ export default class ImageZoom extends React.Component {
   			coefficient: 1,
   			translateX: 0,
   			translateY: 0,
-  			rotate: 0})
+  			rotate: 0
+  		})
+  	}
+  	if (preIndex > srcs.length) {
+  		this.setState({
+  			show: false,
+  			showSrc: null
+  		})
   	}
   }
 
@@ -114,6 +116,7 @@ export default class ImageZoom extends React.Component {
   		coefficient: Number(this.state.coefficient + 0.1)
   	})
   }
+  // eslint-disable-next-line consistent-return
   suoxiao = () => {
   	// 最小不放大正常显示
   	if (this.state.coefficient.toFixed(1) < 0.4) return false
@@ -161,12 +164,20 @@ export default class ImageZoom extends React.Component {
   		rotate: rotate + 90
   	})
   }
-  render() {
+	// 关闭
+	handlerClose = () => {
+		this.setState({
+			show: false,
+			showSrc: null
+		})
+	}
+
+	render() {
   	const { zIndex } = this.props
-  	const { showSrc, drag, translateX, translateY, index, rotate, list} = this.state
+  	const { show, showSrc, drag, translateX, translateY, index, rotate, list} = this.state
   	return (
   		// eslint-disable-next-line react/jsx-filename-extension
-  		<div ref={this.container} className="ImageZoom" style={{zIndex: zIndex}}>
+  	 <div ref={this.container} className="ImageZoom" style={{zIndex: zIndex}}>
   			{
   				list.map((src, key) => (
   					<div className={classes.imageZoom} key={src} style={{zIndex: zIndex + 10}}>
@@ -174,10 +185,20 @@ export default class ImageZoom extends React.Component {
   						src={src}
   						alt={src}
   						className={classes.img}
-  						onClick={() => this.selectImg(src, key)}/>
+  						onClick={() => this.selectImg(src, key)}
+  							style={{zIndex: zIndex + 10}}/>
   					{
-  						showSrc && <div className={classes.glassBox}>
-  							<div className={classes.glass} onMouseUp={this.holdUp} style={{zIndex: zIndex + 20}}>
+  						showSrc && <div
+  								className={classes.glassBox}
+  								style={{
+  										zIndex: zIndex + 20
+  									}}>
+  							 {!show ? null : <div
+  									className={classes.glass}
+  									onMouseUp={this.holdUp}
+  									style={{
+  										zIndex: zIndex + 20
+  									}}>
   								<img
   									src={showSrc}
   									onMouseUp={this.holdUp}
@@ -196,13 +217,13 @@ export default class ImageZoom extends React.Component {
   											zIndex: zIndex + 30
   										}}
   								/>
-  							</div>
+  							</div>}
   						</div>
   					}
   				</div>))
   			}
-  			<div className={classes.footer} style={{display: showSrc ? "block" : "none", zIndex: zIndex + 20}}>
-  				<div className={classes.footetnav}>
+  			{!show ? null : <div className={classes.footer} style={{display: showSrc ? "block" : "none", zIndex: zIndex + 20}}>
+  				<div className={classes.footetnav} style={{zIndex: zIndex + 20}}>
   					<span onClick={() => this.preStep(index)}>上一张</span>
   					<span onClick={() => this.nextStep(index)}>下一张</span>
   					<span onClick={this.fangda}>放大</span>
@@ -210,8 +231,19 @@ export default class ImageZoom extends React.Component {
   					<span onClick={this.leftRotate}>左旋</span>
   					<span onClick={this.rightRotate}>右旋</span>
   				</div>
-  			</div>
+  			</div>}
+  			{
+  				!show ? null : <div className={classes.glassBoxClose} style={{zIndex: zIndex + 20}}>
+  					<Icon
+  						type="close"
+  						style={{
+  							marginLeft: "10px",
+  						}}
+							onClick={this.handlerClose}
+						/>
+  				</div>
+  			}
   		</div>
   	)
-  }
+	}
 }

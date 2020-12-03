@@ -1,7 +1,8 @@
+/* eslint-disable */
 /*
  * @Author: your name
  * @Date: 2020-11-14 10:57:22
- * @LastEditTime: 2020-11-25 18:15:27
+ * @LastEditTime: 2020-12-02 17:07:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \reactViewer\src\components\viewImage\Viewer.jsx

@@ -1,12 +1,14 @@
-/* eslint-disable react/sort-comp */
 /*
  * @Author: your name
  * @Date: 2020-11-13 10:10:49
- * @LastEditTime: 2020-11-25 18:19:21
+ * @LastEditTime: 2020-12-02 17:11:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \reactViewer\src\components\Viewer\ImageListRender.jsx
  */
+/* eslint-disable  */
+/* eslint-disable react/sort-comp */
+
 import React, { PureComponent, Children, cloneElement } from "react"
 import ReactDom from "react-dom"
 import Viewer from "viewerjs"
@@ -21,7 +23,7 @@ class ImageListRender extends PureComponent {
 		const { imageUrls } = this.props
 		return (
 			<div style={{ display: "none" }} ref={this.imageListWrapper}>
-				{imageUrls.map((url, index) => <img src={url} alt={url} key={index} style={{ display: "none" }}/>)}
+				{imageUrls.map((url) => <img src={url} alt={url} key={url} style={{ display: "none" }}/>)}
 			</div>
 		)
 	}
@@ -54,10 +56,6 @@ class ImageListRender extends PureComponent {
 				hide()////关闭的时候通过调用父组件方法触发父组件state来卸载子组件
 			}
 		}
-		console.log("ImageListRender-start")
-		console.log(this.imageListWrapper.current)
-		console.log(options)
-		console.log("ImageListRender-end")
 		this.viewer = new Viewer(ReactDom.findDOMNode(this.imageListWrapper.current), options)
 		this.viewer.view(index)
 	}
